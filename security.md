@@ -206,9 +206,6 @@ Attacker rotates IPs or scripts requests to bypass request-per-minute limits.
 - Detect repeated abuse patterns
 - Log and block suspicious clients
 
-Status: Planned
-
----
 
 ## 9. Unauthorized AI Endpoint Access
 
