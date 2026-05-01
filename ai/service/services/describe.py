@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from sanitize import sanitize_input
+from services.sanitize import sanitize_input
 
 def describe():
 
