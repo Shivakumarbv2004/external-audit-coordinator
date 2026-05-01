@@ -31,7 +31,9 @@ The AI may be manipulated into bypassing intended behavior.
 - Validate inputs before sending to Groq
 - Reject malicious requests with HTTP 400
 
-Status: Planned
+Status: Implemented
+
+Implementation: `input_sanitization.py` provides Flask middleware that strips HTML tags, detects prompt injection patterns, and returns HTTP 400 with a clear error message.
 
 ---
 
@@ -97,7 +99,9 @@ Attacker floods AI endpoints with excessive requests.
 - 10 requests/min for /generate-report
 - Return HTTP 429 when exceeded
 
-Status: Planned
+Status: Implemented
+
+Implementation: `rate_limiting.py` configures Flask-Limiter with default 30 req/min, 10 req/min on /generate-report, and returns 429 with retry_after header.
 
 ---
 
