@@ -128,10 +128,10 @@ Status: Planned
 
 | Test | Result |
 |------|--------|
-Prompt Injection | Pending |
-SQL Injection | Pending |
+Prompt Injection | Pass |
+SQL Injection | Pass |
 XSS | Pending |
-Empty Input | Pending |
+Empty Input | Pass |
 Rate Limit | Pending |
 
 ---
