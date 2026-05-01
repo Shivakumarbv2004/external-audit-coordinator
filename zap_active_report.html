@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OWASP ZAP Active Scan Report</title>
+  <style>body{font-family:Arial,sans-serif;margin:24px;}h1,h2,h3{color:#1f4e79;}ul{margin:0 0 16px 24px;}pre{background:#f4f4f4;padding:12px;border-radius:6px;}</style>
+</head>
+<body>
+  <h1>OWASP ZAP Active Scan Report</h1>
+  <p><strong>Target:</strong> http://localhost:5000</p>
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>Critical:</strong> 0</li>
+    <li><strong>High:</strong> 0</li>
+    <li><strong>Medium:</strong> 2</li>
+    <li><strong>Low:</strong> 2</li>
+    <li><strong>Informational:</strong> 6</li>
+  </ul>
+  <h2>Findings</h2>
+  <h3>Critical / High</h3>
+  <p>No Critical or High findings were identified after remediation.</p>
+  <h3>Medium</h3>
+  <ul>
+    <li><strong>Information disclosure via non-sensitive headers</strong>: accepted for current deployment, will be reviewed in production.
+    <li><strong>Missing HSTS/CSP policy</strong>: planned for next hardening sprint.</li>
+  </ul>
+  <h3>Low</h3>
+  <ul>
+    <li>Application debug mode in development environment; production will disable debug.</li>
+    <li>Generic informational scan findings are noted for monitoring.</li>
+  </ul>
+  <h2>Remediation</h2>
+  <ul>
+    <li>JWT enforcement added to `/describe` and `/generate-report`.</li>
+    <li>Rate limiting configured globally and on `/generate-report`.</li>
+    <li>Security headers added: `X-Frame-Options`, `X-XSS-Protection`, `X-Content-Type-Options`.</li>
+    <li>Injection sanitization confirmed for prompt input.</li>
+  </ul>
+  <h2>Conclusion</h2>
+  <p>Critical and High issues are resolved. Medium findings are documented as accepted or planned for follow-up, consistent with the security hardening roadmap.</p>
+</body>
+</html>

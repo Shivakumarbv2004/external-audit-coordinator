@@ -1,9 +1,11 @@
+import os
+import re
+from functools import wraps
+
+import jwt
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-# from services.sanitize import sanitize_input
-
-import re
 
 BLOCKED_PATTERNS = [
     r"ignore previous instructions",
@@ -33,7 +35,14 @@ def sanitize_input(user_input):
 
 # from services.rate_limiting import setup_rate_limiting
 
+JWT_SECRET = os.getenv('JWT_SECRET', 'change-me-set-a-secure-32-byte-secret!')
+
 app = Flask(__name__)
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["30 per minute"]
+)
 
 @app.after_request
 def add_security_headers(response):
@@ -42,14 +51,27 @@ def add_security_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'
     return response
 
-# Setup rate limiting
-# limiter = setup_rate_limiting(app)
+
+def requires_jwt(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        auth_header = request.headers.get('Authorization', '')
+        if not auth_header.startswith('Bearer '):
+            return jsonify({"error": "Unauthorized"}), 401
+        token = auth_header.split(' ', 1)[1].strip()
+        try:
+            jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+        except jwt.PyJWTError:
+            return jsonify({"error": "Unauthorized"}), 401
+        return f(*args, **kwargs)
+    return wrapper
 
 @app.route('/test', methods=['GET'])
 def test():
     return "OK"
 
 @app.route('/describe', methods=['POST'])
+@requires_jwt
 def describe_endpoint():
     data = request.get_json()
     prompt = data.get("prompt", "")
@@ -66,10 +88,11 @@ def describe_endpoint():
     return jsonify({"message": "Prompt processed successfully"}), 200
 
 @app.route('/generate-report', methods=['POST'])
-# @limiter.limit("10 per minute")
+@limiter.limit("10 per minute")
+@requires_jwt
 def generate_report():
     # Placeholder for generate report logic
     return {"message": "Report generated"}, 200
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run(debug=False, use_reloader=False)
