@@ -39,6 +39,7 @@ app = Flask(__name__)
 def add_security_headers(response):
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
     return response
 
 # Setup rate limiting

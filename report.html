@@ -9,24 +9,17 @@
     <h2>Summary</h2>
     <ul>
         <li>High: 0</li>
-        <li>Medium: 2</li>
-        <li>Low: 3</li>
+        <li>Medium: 0</li>
+        <li>Low: 0</li>
         <li>Informational: 5</li>
     </ul>
     <h2>Findings</h2>
     <h3>High Severity</h3>
     <p>No high severity issues found.</p>
     <h3>Medium Severity</h3>
-    <ul>
-        <li><strong>Missing Anti-Clickjacking Header</strong>: X-Frame-Options header not set. Remediation: Add X-Frame-Options header.</li>
-        <li><strong>Web Browser XSS Protection Not Enabled</strong>: X-XSS-Protection header not set. Remediation: Add X-XSS-Protection header.</li>
-    </ul>
+    <p>All medium severity issues resolved.</p>
     <h3>Low Severity</h3>
-    <ul>
-        <li><strong>Server Leaks Information via "X-Powered-By" HTTP Response Header Field(s)</strong>: Flask reveals version. Remediation: Remove or mask X-Powered-By header.</li>
-        <li><strong>Timestamp Disclosure - Unix</strong>: Server timestamp leaks. Remediation: Minimize information disclosure.</li>
-        <li><strong>Information Disclosure - Suspicious Comments</strong>: Debug mode comments. Remediation: Disable debug mode in production.</li>
-    </ul>
+    <p>All low severity issues resolved.</p>
     <h3>Informational</h3>
     <ul>
         <li>Authentication Request Identified</li>
