@@ -429,6 +429,16 @@ The External Audit Coordinator system has undergone comprehensive security harde
 ### Production Readiness
 The External Audit Coordinator system has passed all security requirements and is approved for production deployment with the noted residual risks tracked for follow-up implementation.
 
+---
+
+## Day 16 Security Talking Points
+
+- **JWT Authentication**: All API endpoints validate JWT tokens and enforce role-based access control, ensuring only authenticated users can access sensitive operations.
+- **Rate Limiting**: Flask-Limiter protects the application with a global 30 requests/minute policy and a stricter 10 requests/minute limit on sensitive endpoints, returning HTTP 429 when exceeded.
+- **Input Sanitization**: User input is sanitized before processing, blocking HTML/script payloads and known injection patterns to prevent XSS, prompt injection, and SQL injection attempts.
+- **OWASP ZAP Results**: ZAP scans confirm zero Critical/High findings after remediation, demonstrating that the current security controls are effective and validated.
+
+
 **Signed Off By:**
 - AI Developer 3 (Security Implementation)
 - Date: May 2, 2026
