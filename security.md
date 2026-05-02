@@ -111,6 +111,20 @@ A print-ready copy is available as `SECURITY_PRINT_COPY.md`.
 
 ---
 
+## Day 20 Demo Summary
+
+### Demo Security Highlights
+- Demonstrated the application returns **401 Unauthorized** when a request is sent without a valid JWT token.
+- Demonstrated the application returns **400 Bad Request** for injection-style input, confirming input sanitization is active.
+- Referenced `SECURITY.md` as the source of truth for implemented controls, test results, and fixed findings.
+- Confirmed that previously identified findings have been fixed, including authentication enforcement, rate limiting, injection blocking, and security header hardening.
+
+### Demo Messaging
+The system now enforces JWT authentication on protected endpoints and rejects malicious input attempts before they are processed. `SECURITY.md` documents the completion of these fixes and validates the application’s hardened security posture.
+
+
+---
+
 ## Day 19 Confidence Check
 
 Each team member presented their assigned security section solo in a 90-second delivery to confirm clarity and ownership.
