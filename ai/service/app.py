@@ -64,11 +64,23 @@ def requires_jwt(f):
             return jsonify({"error": "Unauthorized"}), 401
         token = auth_header.split(' ', 1)[1].strip()
         try:
-            jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+            payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+            request.user = payload  # Store user info
         except jwt.PyJWTError:
             return jsonify({"error": "Unauthorized"}), 401
         return f(*args, **kwargs)
     return wrapper
+
+def requires_role(role):
+    def decorator(f):
+        @wraps(f)
+        @requires_jwt
+        def wrapper(*args, **kwargs):
+            if request.user.get('role') != role:
+                return jsonify({"error": "Forbidden"}), 403
+            return f(*args, **kwargs)
+        return wrapper
+    return decorator
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -93,7 +105,7 @@ def describe_endpoint():
 
 @app.route('/generate-report', methods=['POST'])
 @limiter.limit("10 per minute")
-@requires_jwt
+@requires_role('admin')
 def generate_report():
     # Placeholder for generate report logic
     return {"message": "Report generated"}, 200
