@@ -547,3 +547,28 @@ The system is approved for production deployment. All checklist items are comple
 **Project Status:** ✅ SECURITY COMPLETE
 
 ---
+
+## Day 17 Individual Practice & Gap Fixes
+
+Each team member presented their security section solo, without notes, to validate understanding and identify areas needing clarification.
+
+### Practice Outcomes
+- **Alice Johnson**: Clearly explained JWT and role-based access; gap found in describing token refresh strategy and updated notes to include it.
+- **Bob Chen**: Demonstrated input sanitization rules and XSS prevention; gap found in edge-case handling for malformed JSON, now clarified in code comments.
+- **Carol Davis**: Covered rate limiting and header enforcement; gap found in production storage recommendations for Flask-Limiter, now documented for deployment.
+- **David Evans**: Reviewed ZAP results and test coverage; gap found in formalizing repeat test cadence, now added to the security plan.
+- **Eva Foster**: Validated compliance and data protection; gap found in explicit data retention controls, now noted as a follow-up item.
+- **Frank Garcia**: Presented final hardening steps and middleware; gap found in aligning CSP policy with future UI behavior, now flagged for integration testing.
+
+### Gap Fixes
+- Added production deployment note for Flask-Limiter storage backend.
+- Clarified malformed JSON handling in input validation.
+- Documented token refresh planning and lifecycle awareness.
+- Added formal repeat test cadence for ZAP and security regression scans.
+- Noted explicit data retention and log review requirements.
+- Flagged CSP tuning for UI integration.
+
+### Result
+This practice session confirmed the team’s security ownership and filled gaps in implementation knowledge, testing plans, and production hardening details.
+
+---
