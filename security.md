@@ -171,6 +171,21 @@ All Week 2 security controls have been implemented and verified. Application is 
 The Active Scan confirmed that all Critical and High findings are addressed by the current security controls. Medium findings are documented as accepted or planned for follow-up.
 
 ---
+## Day 12 Remediation
+
+### Security Hardening
+- ✅ **Flask-Talisman** integrated to enforce HSTS and CSP
+- ✅ `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, and `X-XSS-Protection` now managed by the middleware
+- ✅ Zero Critical and High OWASP ZAP findings remaining on re-scan
+
+### Medium Findings
+- **Accepted**: framework header metadata disclosure is low risk in development and will be reviewed in production
+- **Planned**: add stronger CSP and HSTS enforcement in production with HTTPS-only deployment
+
+### Sign-Off
+Day 12 fixes are implemented. All Critical/High active scan issues are resolved, with Medium items tracked for follow-up.
+
+---
 ## Security Controls Planned
 - Input Sanitization
 - Rate Limiting

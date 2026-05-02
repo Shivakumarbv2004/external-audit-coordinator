@@ -6,6 +6,7 @@ import jwt
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_talisman import Talisman
 
 BLOCKED_PATTERNS = [
     r"ignore previous instructions",
@@ -44,12 +45,15 @@ limiter = Limiter(
     default_limits=["30 per minute"]
 )
 
-@app.after_request
-def add_security_headers(response):
-    response.headers['X-Frame-Options'] = 'DENY'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
-    response.headers['X-Content-Type-Options'] = 'nosniff'
-    return response
+Talisman(
+    app,
+    content_security_policy={"default-src": ["'self'"]},
+    force_https=False,
+    strict_transport_security=True,
+    strict_transport_security_preload=True,
+    strict_transport_security_max_age=31536000,
+    content_security_policy_nonce_in=['script-src']
+)
 
 
 def requires_jwt(f):

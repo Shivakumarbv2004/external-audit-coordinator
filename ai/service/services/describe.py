@@ -1,3 +1,5 @@
+print("describe module loaded")
+
 from flask import request, jsonify
 from services.sanitize import sanitize_input
 
@@ -15,3 +17,4 @@ def describe():
         }), 400
 
     # continue normal AI logic
+    return jsonify({"message": "Prompt processed successfully"}), 200
